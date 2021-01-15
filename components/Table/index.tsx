@@ -8,7 +8,7 @@ import {
   deleteStorytellers
 } from "../../redux/actions/storytellerActions";
 
-import CheckBoxInput from "../CheckBoxInput";
+import CheckBox from "../CheckBox";
 
 import {
   TableContainer,
@@ -36,7 +36,12 @@ export default function Table() {
 
   // List of selected storytellers ids
   const [selectedStorytellers, setSelectedStorytellers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(
+    Math.ceil(Object.values(storytellers).length / 5)
+  );
   const [editing, setEditing] = useState(false);
+
   const [name, setName] = useState("");
 
   // Selects all storytellers id if selected length !== storytellers amount, or empty selected storytellers if so.
@@ -84,18 +89,36 @@ export default function Table() {
     setEditing(false);
   }
 
-  // If is selected other storyteller during edit, stop editing
   useEffect(() => {
+    // If is selected other storyteller during edit, stop editing
     if (editing) {
       setEditing(false);
       setName("");
     }
+
+    // Updates max page on change length of storytellers
+    setMaxPage(Math.ceil(Object.values(storytellers).length / 5));
   }, [selectedStorytellers.length]);
+
+  // If maxPage changes, check user page to redirect
+  useEffect(() => {
+    if (currentPage > maxPage) setCurrentPage(maxPage);
+  }, [maxPage]);
 
   // Verifys storyteller
   function handleVerification(id: number) {
     dispatch(verifyStoryteller(id));
   }
+
+  function handlePage(page: number) {
+    if (
+      (page === -1 && currentPage > 1) ||
+      (page === 1 && currentPage < maxPage)
+    )
+      setCurrentPage(currentPage + page);
+  }
+
+  useEffect(() => {}, []);
 
   return (
     <TableContainer>
@@ -103,7 +126,7 @@ export default function Table() {
         <thead>
           <tr>
             <th>
-              <CheckBoxInput
+              <CheckBox
                 value={
                   Object.values(storytellers).length > 0 &&
                   selectedStorytellers.length ===
@@ -112,7 +135,9 @@ export default function Table() {
                 onChangeValue={handleSelectAll}
               />
             </th>
-            <th style={{ textAlign: "left" }}>Storyteller</th>
+            <th width="40%" style={{ textAlign: "left" }}>
+              Storyteller
+            </th>
             <th style={{ textAlign: "left" }}>Daily Capacity</th>
             <th style={{ textAlign: "center" }}>Verification</th>
             <th style={{ textAlign: "center" }}>Tags</th>
@@ -120,44 +145,49 @@ export default function Table() {
         </thead>
 
         <tbody>
-          {Object.values(storytellers).map(storyteller => (
-            <tr key={storyteller.id}>
-              <td>
-                <CheckBoxInput
-                  value={selectedStorytellers.includes(storyteller.id)}
-                  onChangeValue={() => handleSelect(storyteller.id)}
-                />
-              </td>
-              <td>
-                {editing && selectedStorytellers[0] === storyteller.id ? (
-                  <input value={name} onChange={e => setName(e.target.value)} />
-                ) : (
-                  storyteller.name
-                )}
-              </td>
-              <td>
-                {plans[companies[storyteller.company].plan].dayCapacity}{" "}
-                stories/day
-              </td>
-              <td align="center">
-                <VerifyButton
-                  type="button"
-                  verified={storyteller.verification}
-                  onClick={() => {
-                    if (!storyteller.verification)
-                      handleVerification(storyteller.id);
-                  }}
-                >
-                  {storyteller.verification ? "Verified" : "Verify"}
-                </VerifyButton>
-              </td>
-              <td align="center">
-                <PlanTag>
-                  {plans[companies[storyteller.company].plan].tag}
-                </PlanTag>
-              </td>
-            </tr>
-          ))}
+          {Object.values(storytellers)
+            .slice((currentPage - 1) * 5, currentPage * 5)
+            .map(storyteller => (
+              <tr key={storyteller.id}>
+                <td>
+                  <CheckBox
+                    value={selectedStorytellers.includes(storyteller.id)}
+                    onChangeValue={() => handleSelect(storyteller.id)}
+                  />
+                </td>
+                <td>
+                  {editing && selectedStorytellers[0] === storyteller.id ? (
+                    <input
+                      value={name}
+                      onChange={e => setName(e.target.value)}
+                    />
+                  ) : (
+                    storyteller.name
+                  )}
+                </td>
+                <td>
+                  {plans[companies[storyteller.company].plan].dayCapacity}{" "}
+                  stories/day
+                </td>
+                <td align="center">
+                  <VerifyButton
+                    type="button"
+                    verified={storyteller.verification}
+                    onClick={() => {
+                      if (!storyteller.verification)
+                        handleVerification(storyteller.id);
+                    }}
+                  >
+                    {storyteller.verification ? "Verified" : "Verify"}
+                  </VerifyButton>
+                </td>
+                <td align="center">
+                  <PlanTag>
+                    {plans[companies[storyteller.company].plan].tag}
+                  </PlanTag>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </Table>
 
@@ -176,9 +206,15 @@ export default function Table() {
         </div>
 
         <div>
-          <span>Page 1</span>
-          <PageButton type="button">&#8249;</PageButton>
-          <PageButton type="button">&#8250;</PageButton>
+          <span>
+            Page {currentPage} of {maxPage}
+          </span>
+          <PageButton type="button" onClick={() => handlePage(-1)}>
+            &#8249;
+          </PageButton>
+          <PageButton type="button" onClick={() => handlePage(1)}>
+            &#8250;
+          </PageButton>
         </div>
       </TableButtons>
     </TableContainer>
