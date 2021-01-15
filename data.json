@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "Michael Warshafsky",
+    "verification": false,
+    "plan": {
+      "id": 1,
+      "title": "basic",
+      "dayCapacity": 10,
+      "tag": "2020 VIP"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Justin Rotman",
+    "verification": false,
+    "plan": {
+      "id": 1,
+      "title": "basic",
+      "dayCapacity": 10,
+      "tag": "2020 VIP"
+    }
+  }
+]

@@ -1,35 +1,33 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import { render } from "react-dom";
-import { ButtonCounter } from "./ButtonCounter";
-import "./style.css";
+import { Provider } from "react-redux";
 
-interface AppState {
-  name: string;
+import store from "./redux/store";
+
+import users from "./data.json";
+
+// @ts-ignore
+import normalizeData from "./services/normalizr";
+
+import GlobalStyles from "./styles";
+
+function App() {
+  useEffect(() => {
+    console.log(normalizeData(users));
+  });
+
+  return (
+    <div>
+      <h1>Hello World!</h1>
+    </div>
+  );
 }
 
-class App extends Component<{}, AppState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "Hello React Button"
-    };
-  }
-
-  onChildClicked(e) {
-    console.warn("callback from parent triggered", e);
-  }
-
-  render() {
-    return (
-      <div>
-        <p>Simple React Typescript Starter</p>
-        <ButtonCounter
-          name={this.state.name}
-          onClicked={e => this.onChildClicked(e)}
-        />
-      </div>
-    );
-  }
-}
-
-render(<App />, document.getElementById("root"));
+render(
+  <Provider store={store}>
+    <GlobalStyles />
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
