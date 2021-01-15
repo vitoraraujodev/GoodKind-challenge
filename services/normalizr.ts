@@ -19,7 +19,7 @@ function normalizeData(data: [object]): object {
     plan: plan
   });
 
-  const normalizedData = normalize(data, storytellers);
+  const normalizedData = normalize(data, [storytellers]);
 
   return normalizedData;
 }

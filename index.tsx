@@ -8,7 +8,7 @@ import store from "./redux/store";
 // @ts-ignore
 import { setStorytellers } from "./redux/actions/storytellerActions";
 // @ts-ignore
-import { StorytellerInterface } from "./redux/reducer/storytellerReducer";
+import { StorytellerInterface } from "./redux/reducers/storytellerReducer";
 
 import users from "./data.json";
 
@@ -21,12 +21,13 @@ function App() {
   const dispatch = useDispatch();
 
   const storytellers = useSelector((state: StorytellerInterface) => {
-    state.storytellerReducer.storytellers;
+    console.log(state);
   });
 
   useEffect(() => {
     const normalizedUsers = normalizeData(users);
-    dispatch(setStorytellers(normalizedUsers));
+    console.log(normalizedUsers);
+    // dispatch(setStorytellers(normalizedUsers));
   });
 
   useEffect(() => {

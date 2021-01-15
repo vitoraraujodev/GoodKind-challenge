@@ -1,21 +1,25 @@
+interface PlanInterface {
+  id: number;
+  title: string;
+  dayCapacity: number;
+  tag: string;
+}
+
+interface CompanyInterface {
+  id: number;
+  title: string;
+  plan: PlanInterface;
+}
+
+interface UserInterface {
+  id: number;
+  name: string;
+  verification: boolean;
+  company: CompanyInterface;
+}
+
 export interface StorytellerInterface {
-  storytellers: [
-    {
-      id: number;
-      name: string;
-      verification: boolean;
-      company: {
-        id: number;
-        title: string;
-        plan: {
-          id: number;
-          title: string;
-          dayCapacity: number;
-          tag: string;
-        };
-      };
-    }
-  ];
+  storytellers: UserInterface[];
 }
 
 const INITIAL_STATE: any = {
