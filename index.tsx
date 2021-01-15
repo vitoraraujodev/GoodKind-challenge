@@ -12,32 +12,34 @@ import { StorytellerInterface } from "./redux/reducers/storytellerReducer";
 
 import users from "./data.json";
 
+import Table from "./components/Table";
+
 // @ts-ignore
 import normalizeData from "./services/normalizr";
+
+import { PageWrapper, PageContent } from "./index.styles";
 
 import GlobalStyles from "./styles";
 
 function App() {
   const dispatch = useDispatch();
 
-  const storytellers = useSelector((state: StorytellerInterface) => {
-    console.log(state);
-  });
+  // const storytellers = useSelector((state: StorytellerInterface) => {
+  //   console.log(state);
+  // });
 
-  useEffect(() => {
-    const normalizedUsers = normalizeData(users);
-    console.log(normalizedUsers);
-    // dispatch(setStorytellers(normalizedUsers));
-  });
-
-  useEffect(() => {
-    console.log(storytellers);
-  }, [storytellers]);
+  // useEffect(() => {
+  //   const normalizedUsers = normalizeData(users);
+  //   console.log(normalizedUsers);
+  //   dispatch(setStorytellers(normalizedUsers.entities));
+  // });
 
   return (
-    <div>
-      <h1>Hello World!</h1>
-    </div>
+    <PageWrapper>
+      <PageContent>
+        <Table />
+      </PageContent>
+    </PageWrapper>
   );
 }
 

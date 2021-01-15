@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-  @import url("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css");
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
   * {
     margin: 0;
@@ -15,6 +15,11 @@ export default createGlobalStyle`
   html, body, #root{
     height: 100%;
   }
+  
+  body, input, button {
+    font-family: 'Roboto', sans-serif;
+  }
+  
   body {
     -webkit-font-smoothing: antialiased;
   }

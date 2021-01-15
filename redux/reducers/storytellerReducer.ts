@@ -8,27 +8,32 @@ interface PlanInterface {
 interface CompanyInterface {
   id: number;
   title: string;
-  plan: PlanInterface;
+  plan: number;
 }
 
 interface UserInterface {
   id: number;
   name: string;
   verification: boolean;
-  company: CompanyInterface;
+  company: number;
 }
 
 export interface StorytellerInterface {
   storytellers: UserInterface[];
+  companies: CompanyInterface[];
+  plans: PlanInterface[];
 }
 
 const INITIAL_STATE: any = {
-  storytellers: []
+  storytellers: [],
+  companies: [],
+  plans: []
 };
 
 export default function storytellerReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "SET_STORYTELLERS":
+      console.log("ow");
       return { storytellers: action.payload };
 
     default:
