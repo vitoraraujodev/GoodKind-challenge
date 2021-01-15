@@ -33,8 +33,11 @@ const INITIAL_STATE: any = {
 export default function storytellerReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "SET_STORYTELLERS":
-      console.log("ow");
-      return { storytellers: action.payload };
+      return {
+        storytellers: action.payload.storytellers,
+        companies: action.payload.companies,
+        plans: action.payload.plans
+      };
 
     default:
       return state;

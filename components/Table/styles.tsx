@@ -7,24 +7,48 @@ export const TableContainer = styled.div`
 export const Table = styled.table`
   min-width: 640px;
 
-  border-collapse: collapse;
-
-  tr {
-    padding: 16px;
-  }
-
   th + th,
   td + td {
     padding-left: 8px;
   }
 
+
+
   th {
     color: #888;
   }
+`;
 
-  td {
-    font-weight: 400;
+export const VerifyButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+  height: 24px;
+  border: 0;
+  border-radius: 6px;
+  font-size: 15px;
+  color: ${props => (props.verified ? "#0f0" : "#ee4d64")};
+  font-weight: bold;
+  background: ${props => (props.verified ? "#0f0" : "#fff")};
+
+  &:hover {
+    background: ${props => (props.verified ? "" : "#f6f6f6")};
   }
+`;
+
+export const PlanTag = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 4px;
+  height: 24px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #666;
+  font-weight: bold;
+  background: #ddd;
 `;
 
 export const TableButtons = styled.div`
@@ -89,6 +113,7 @@ export const EditButton = styled.button`
 `;
 
 export const PageButton = styled.button`
+  text-align: center;
   height: 32px;
   width: 32px;
   border: 1px solid #ddd;

@@ -6,6 +6,8 @@ import CheckBoxInput from "../CheckBoxInput";
 import {
   TableContainer,
   Table,
+  VerifyButton,
+  PlanTag,
   TableButtons,
   DeleteButton,
   EditButton,
@@ -16,28 +18,29 @@ import {
 import { StorytellerInterface } from "./redux/reducers/storytellerReducer";
 
 export default function Table() {
-  // const storytellers = useSelector(
-  //   (state: StorytellerInterface) => state.storytellerReducer
-  // );
+  const storytellers = useSelector(
+    (state: any) => state.storytellerReducer.storytellers
+  );
+
+  const companies = useSelector(
+    (state: any) => state.storytellerReducer.companies
+  );
+
+  const plans = useSelector((state: any) => state.storytellerReducer.plans);
+
+  useEffect(() => {
+    console.log("st", storytellers);
+  }, [storytellers]);
+
+  useEffect(() => {
+    console.log("c", companies);
+  }, [companies]);
+
+  useEffect(() => {
+    console.log("p", plans);
+  }, [plans]);
 
   const [allSelected, setAllSelected] = useState(false);
-
-  const storytellers = [
-    {
-      id: 1,
-      name: "Michael Warshfsky",
-      dailyCapacity: 10,
-      verification: false,
-      tag: "2020 VIP"
-    },
-    {
-      id: 1,
-      name: "Michael Warshfsky",
-      dailyCapacity: 10,
-      verification: false,
-      tag: "2020 VIP"
-    }
-  ];
 
   return (
     <TableContainer>
@@ -50,16 +53,16 @@ export default function Table() {
                 onChangeValue={() => setAllSelected(!allSelected)}
               />
             </th>
-            <th>Storyteller</th>
-            <th>Daily Capacity</th>
+            <th style={{ textAlign: "left" }}>Storyteller</th>
+            <th style={{ textAlign: "left" }}>Daily Capacity</th>
             <th style={{ textAlign: "center" }}>Verification</th>
             <th style={{ textAlign: "center" }}>Tags</th>
           </tr>
         </thead>
 
         <tbody>
-          {storytellers.map(storyteller => (
-            <tr>
+          {Object.values(storytellers).map(storyteller => (
+            <tr key={storyteller.id}>
               <td>
                 <CheckBoxInput
                   value={allSelected}
@@ -67,11 +70,20 @@ export default function Table() {
                 />
               </td>
               <td>{storyteller.name}</td>
-              <td>{storyteller.dailyCapacity} stories/day</td>
-              <td align="center">
-                {storyteller.verification ? "Verified" : "Verify"}
+              <td>
+                {plans[companies[storyteller.company].plan].dayCapacity}{" "}
+                stories/day
               </td>
-              <td align="center">{storyteller.tag}</td>
+              <td align="center">
+                <VerifyButton type="button" verified={storyteller.verification}>
+                  {storyteller.verification ? "Verified" : "Verify"}
+                </VerifyButton>
+              </td>
+              <td align="center">
+                <PlanTag>
+                  {plans[companies[storyteller.company].plan].tag}
+                </PlanTag>
+              </td>
             </tr>
           ))}
         </tbody>

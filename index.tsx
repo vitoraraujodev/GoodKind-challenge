@@ -7,10 +7,8 @@ import store from "./redux/store";
 
 // @ts-ignore
 import { setStorytellers } from "./redux/actions/storytellerActions";
-// @ts-ignore
-import { StorytellerInterface } from "./redux/reducers/storytellerReducer";
 
-import users from "./data.json";
+import users from "./.mockend.json";
 
 import Table from "./components/Table";
 
@@ -24,15 +22,10 @@ import GlobalStyles from "./styles";
 function App() {
   const dispatch = useDispatch();
 
-  // const storytellers = useSelector((state: StorytellerInterface) => {
-  //   console.log(state);
-  // });
-
-  // useEffect(() => {
-  //   const normalizedUsers = normalizeData(users);
-  //   console.log(normalizedUsers);
-  //   dispatch(setStorytellers(normalizedUsers.entities));
-  // });
+  useEffect(() => {
+    const normalizedUsers = normalizeData(users);
+    dispatch(setStorytellers(normalizedUsers.entities));
+  }, []);
 
   return (
     <PageWrapper>

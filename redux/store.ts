@@ -5,7 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 
 // @ts-ignore
-import { storytellerReducer } from "./reducers/storytellerReducer";
+import storytellerReducer from "./reducers/storytellerReducer";
 
 import httpHandler from "./middleware/http-handler";
 
