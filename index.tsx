@@ -1,9 +1,14 @@
 import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 
 import store from "./redux/store";
+
+// @ts-ignore
+import { setStorytellers } from "./redux/actions/storytellerActions";
+// @ts-ignore
+import { StorytellerInterface } from "./redux/reducer/storytellerReducer";
 
 import users from "./data.json";
 
@@ -13,9 +18,20 @@ import normalizeData from "./services/normalizr";
 import GlobalStyles from "./styles";
 
 function App() {
-  useEffect(() => {
-    console.log(normalizeData(users));
+  const dispatch = useDispatch();
+
+  const storytellers = useSelector((state: StorytellerInterface) => {
+    state.storytellerReducer.storytellers;
   });
+
+  useEffect(() => {
+    const normalizedUsers = normalizeData(users);
+    dispatch(setStorytellers(normalizedUsers));
+  });
+
+  useEffect(() => {
+    console.log(storytellers);
+  }, [storytellers]);
 
   return (
     <div>

@@ -2,16 +2,17 @@ export interface StorytellerInterface {
   storytellers: [
     {
       id: number;
-      user: {
-        id: number;
-        name: string;
-        verification: boolean;
-      };
-      plan: {
+      name: string;
+      verification: boolean;
+      company: {
         id: number;
         title: string;
-        dayCapacity: number;
-        tag: string;
+        plan: {
+          id: number;
+          title: string;
+          dayCapacity: number;
+          tag: string;
+        };
       };
     }
   ];

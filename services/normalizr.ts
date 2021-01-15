@@ -4,13 +4,18 @@ function normalizeData(data: [object]): object {
   // Defines plans schema
   const plan = new schema.Entity("plans");
 
-  const user = new schema.Entity("users", {
+  const company = new schema.Entity("companies", {
     plan: plan
+  });
+
+  const user = new schema.Entity("users", {
+    company: company
   });
 
   // Defines storytellers schema
   const storytellers = new schema.Entity("storytellers", {
     user: user,
+    company: company,
     plan: plan
   });
 

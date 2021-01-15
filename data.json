@@ -1,16 +1,47 @@
-{
-  "id": 55,
-  "user": 
-    {
+[
+  {
     "id": 1,
     "name": "Michael Warshafsky",
     "verification": false,
-    "plan": 1
+    "company": {
+      "id": 1,
+      "title": "GoodKind",
+      "plan": {
+        "id": 1,
+        "title": "Pro",
+        "dayCapacity": 10,
+        "tag": "2020 VIP"
+      }
+    }
   },
-  "plan": {
-    "id": 1,
-    "title": "basic",
-    "dayCapacity": 10,
-    "tag": "2020 VIP"
+  {
+    "id": 2,
+    "name": "Justin Rotman",
+    "verification": false,
+    "company": {
+      "id": 1,
+      "title": "GoodKind",
+      "plan": {
+        "id": 1,
+        "title": "Pro",
+        "dayCapacity": 10,
+        "tag": "2020 VIP"
+      }
+    }
+  },
+  {
+    "id": 3,
+    "name": "Angela Smith",
+    "verification": false,
+    "company": {
+      "id": 1,
+      "title": "GoodKind",
+      "plan": {
+        "id": 1,
+        "title": "Pro",
+        "dayCapacity": 10,
+        "tag": "2020 VIP"
+      }
+    }
   }
-}
+]
