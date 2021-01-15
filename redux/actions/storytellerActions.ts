@@ -5,6 +5,13 @@ export function setStorytellers(storytellers) {
   };
 }
 
+export function saveStoryteller(storyteller) {
+  return {
+    type: "SAVE_STORYTELLER",
+    payload: storyteller
+  };
+}
+
 // Receives a list of storyteller's ids to delete
 export function deleteStorytellers(storytellersIds) {
   return {

@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // @ts-ignore
-import { deleteStorytellers } from "../../redux/actions/storytellerActions";
+import {
+  saveStoryteller,
+  deleteStorytellers
+} from "../../redux/actions/storytellerActions";
 
 import CheckBoxInput from "../CheckBoxInput";
 
@@ -32,6 +35,8 @@ export default function Table() {
 
   // List of selected storytellers ids
   const [selectedStorytellers, setSelectedStorytellers] = useState([]);
+  const [editing, setEditing] = useState(false);
+  const [name, setName] = useState("");
 
   // Selects all storytellers id if selected length !== storytellers amount, or empty selected storytellers if so.
   function handleSelectAll() {
@@ -44,6 +49,7 @@ export default function Table() {
     }
   }
 
+  // Selects or deselect storyteller's id
   function handleSelect(id: number) {
     if (selectedStorytellers.includes(id)) {
       setSelectedStorytellers(
@@ -57,9 +63,33 @@ export default function Table() {
   function handleDelete() {
     if (selectedStorytellers.length > 0) {
       dispatch(deleteStorytellers(selectedStorytellers));
-      selectedStorytellers([]);
+      setSelectedStorytellers([]);
     }
   }
+
+  // Delete the selected one storyteller
+  function handleEdit() {
+    if (selectedStorytellers.length === 1) {
+      setEditing(true);
+      setName(storytellers[selectedStorytellers[0]].name);
+    }
+  }
+
+  // Saves new name
+  function handleSave() {
+    storytellers[selectedStorytellers[0]].name = name;
+    const newStoryteller = storytellers[selectedStorytellers[0]];
+    dispatch(saveStoryteller(newStoryteller));
+    setEditing(false);
+  }
+
+  // If is selected other storyteller during edit, stop editing
+  useEffect(() => {
+    if (editing) {
+      setEditing(false);
+      setName("");
+    }
+  }, [selectedStorytellers.length]);
 
   return (
     <TableContainer>
@@ -92,7 +122,13 @@ export default function Table() {
                   onChangeValue={() => handleSelect(storyteller.id)}
                 />
               </td>
-              <td>{storyteller.name}</td>
+              <td>
+                {editing && selectedStorytellers[0] === storyteller.id ? (
+                  <input value={name} onChange={e => setName(e.target.value)} />
+                ) : (
+                  storyteller.name
+                )}
+              </td>
               <td>
                 {plans[companies[storyteller.company].plan].dayCapacity}{" "}
                 stories/day
@@ -117,7 +153,13 @@ export default function Table() {
           <DeleteButton type="button" onClick={handleDelete}>
             Delete
           </DeleteButton>
-          <EditButton type="button">Edit</EditButton>
+          <EditButton
+            type="button"
+            editable={selectedStorytellers.length === 1}
+            onClick={editing ? handleSave : handleEdit}
+          >
+            {editing ? "Save" : "Edit"}
+          </EditButton>
         </div>
 
         <div>

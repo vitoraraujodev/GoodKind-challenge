@@ -38,6 +38,17 @@ export default function storytellerReducer(state = INITIAL_STATE, action) {
         companies: action.payload.companies,
         plans: action.payload.plans
       };
+
+    case "SAVE_STORYTELLER":
+      const storyteller = action.payload;
+
+      state.storytellers[storyteller.id] = storyteller;
+
+      return {
+        ...state,
+        storytellers: { ...state.storytellers }
+      };
+
     case "DELETE_STORYTELLERS":
       const storytellersIds = action.payload;
 

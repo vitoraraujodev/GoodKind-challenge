@@ -113,17 +113,20 @@ export const EditButton = styled.button`
   border: 0;
   border-radius: 6px;
   font-size: 18px;
-  color: #ee4d64;
+  color: ${props => (props.editable ? "#ee4d64" : "#acacac")};
   background: #fff;
 
+  cursor: default;
+  cursor: ${props => props.editable && "pointer"};
+
   &:hover {
-    background: #f4f4f4;
+    background: ${props => props.editable && "#f4f4f4"};
   }
   &:focus {
     outline: none;
   }
   &:active {
-    background: #ededed;
+    background: ${props => props.editable && "#ededed"};
   }
 `;
 
