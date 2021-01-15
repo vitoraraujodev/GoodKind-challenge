@@ -95,16 +95,18 @@ export default function Table() {
       setEditing(false);
       setName("");
     }
-
-    // Updates max page on change length of storytellers
-    const newMax = Math.ceil(Object.values(storytellers).length / 5);
-    if (newMax !== maxPage) setMaxPage(newMax);
   }, [selectedStorytellers.length]);
 
   // If maxPage changes, check user page to redirect
   useEffect(() => {
-    if (currentPage > maxPage) setCurrentPage(maxPage);
+    if (maxPage && currentPage > maxPage) setCurrentPage(maxPage);
   }, [maxPage]);
+
+  useEffect(() => {
+    // Updates max page on change of storytellers
+    const newMax = Math.ceil(Object.values(storytellers).length / 5);
+    if (newMax !== maxPage) setMaxPage(newMax);
+  }, [storytellers]);
 
   // Verifys storyteller
   function handleVerification(id: number) {
@@ -118,8 +120,6 @@ export default function Table() {
     )
       setCurrentPage(currentPage + page);
   }
-
-  useEffect(() => {}, []);
 
   return (
     <TableContainer>
@@ -146,8 +146,7 @@ export default function Table() {
         </thead>
 
         <tbody>
-        
-          {storytellers && Object.values(storytellers)
+          {Object.values(storytellers)
             .slice((currentPage - 1) * 5, currentPage * 5)
             .map(storyteller => (
               <tr key={storyteller.id}>

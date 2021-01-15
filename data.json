@@ -77,7 +77,7 @@
   {
     "id": 6,
     "name": "Mark Zuckerberg",
-    "verification": false,
+    "verification": true,
     "company": {
       "id": 4,
       "title": "Facebook",
@@ -107,7 +107,7 @@
   {
     "id": 8,
     "name": "Rodrigo Pinto",
-    "verification": false,
+    "verification": true,
     "company": {
       "id": 1,
       "title": "GoodKind",
@@ -118,5 +118,5 @@
         "tag": "2020 PRO"
       }
     }
-  },
+  }
 ]
