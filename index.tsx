@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 // import { axios } from "axios";
