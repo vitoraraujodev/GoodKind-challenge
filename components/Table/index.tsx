@@ -97,7 +97,8 @@ export default function Table() {
     }
 
     // Updates max page on change length of storytellers
-    setMaxPage(Math.ceil(Object.values(storytellers).length / 5));
+    const newMax = Math.ceil(Object.values(storytellers).length / 5);
+    if (newMax !== maxPage) setMaxPage(newMax);
   }, [selectedStorytellers.length]);
 
   // If maxPage changes, check user page to redirect
@@ -145,7 +146,8 @@ export default function Table() {
         </thead>
 
         <tbody>
-          {Object.values(storytellers)
+        
+          {storytellers && Object.values(storytellers)
             .slice((currentPage - 1) * 5, currentPage * 5)
             .map(storyteller => (
               <tr key={storyteller.id}>

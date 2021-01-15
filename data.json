@@ -15,36 +15,6 @@
     }
   },
   {
-    "id": 2,
-    "name": "Justin Rotman",
-    "verification": false,
-    "company": {
-      "id": 1,
-      "title": "GoodKind",
-      "plan": {
-        "id": 1,
-        "title": "Pro",
-        "dayCapacity": 10,
-        "tag": "2020 PRO"
-      }
-    }
-  },
-  {
-    "id": 3,
-    "name": "Angela Smith",
-    "verification": false,
-    "company": {
-      "id": 1,
-      "title": "GoodKind",
-      "plan": {
-        "id": 1,
-        "title": "Pro",
-        "dayCapacity": 10,
-        "tag": "2020 PRO"
-      }
-    }
-  },
-  {
     "id": 4,
     "name": "Bill Gates",
     "verification": false,
@@ -60,6 +30,21 @@
     }
   },
   {
+    "id": 2,
+    "name": "Justin Rotman",
+    "verification": false,
+    "company": {
+      "id": 1,
+      "title": "GoodKind",
+      "plan": {
+        "id": 1,
+        "title": "Pro",
+        "dayCapacity": 10,
+        "tag": "2020 PRO"
+      }
+    }
+  },
+  {
     "id": 5,
     "name": "Steve Jobs",
     "verification": false,
@@ -71,6 +56,21 @@
         "title": "VIP",
         "dayCapacity": 50,
         "tag": "2020 VIP"
+      }
+    }
+  },
+  {
+    "id": 3,
+    "name": "Angela Smith",
+    "verification": false,
+    "company": {
+      "id": 1,
+      "title": "GoodKind",
+      "plan": {
+        "id": 1,
+        "title": "Pro",
+        "dayCapacity": 10,
+        "tag": "2020 PRO"
       }
     }
   },
@@ -118,5 +118,5 @@
         "tag": "2020 PRO"
       }
     }
-  }
+  },
 ]
