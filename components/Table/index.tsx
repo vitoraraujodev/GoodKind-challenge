@@ -143,7 +143,10 @@ export default function Table() {
                 <VerifyButton
                   type="button"
                   verified={storyteller.verification}
-                  onClick={() => {if (!storyteller.verification) handleVerification(storyteller.id)}}
+                  onClick={() => {
+                    if (!storyteller.verification)
+                      handleVerification(storyteller.id);
+                  }}
                 >
                   {storyteller.verification ? "Verified" : "Verify"}
                 </VerifyButton>
