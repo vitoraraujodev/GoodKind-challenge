@@ -43,6 +43,9 @@ export const VerifyButton = styled.button`
   font-weight: bold;
   background: ${props => (props.verified ? "#DFF0DF" : "#fff")};
 
+  cursor: pointer;
+  cursor: ${props => props.verified && "default"};
+
   &:hover {
     background: ${props => (props.verified ? "" : "#f4f4f4")};
   }

@@ -12,6 +12,13 @@ export function saveStoryteller(storyteller) {
   };
 }
 
+export function verifyStoryteller(storytellerId) {
+  return {
+    type: "VERIFY_STORYTELLER",
+    payload: storytellerId
+  };
+}
+
 // Receives a list of storyteller's ids to delete
 export function deleteStorytellers(storytellersIds) {
   return {

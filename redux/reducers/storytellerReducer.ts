@@ -49,6 +49,16 @@ export default function storytellerReducer(state = INITIAL_STATE, action) {
         storytellers: { ...state.storytellers }
       };
 
+    case "VERIFY_STORYTELLER":
+      const storytellerId = action.payload;
+
+      state.storytellers[storytellerId].verification = true;
+
+      return {
+        ...state,
+        storytellers: { ...state.storytellers }
+      };
+
     case "DELETE_STORYTELLERS":
       const storytellersIds = action.payload;
 

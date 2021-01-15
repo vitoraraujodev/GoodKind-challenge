@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 // @ts-ignore
 import {
   saveStoryteller,
+  verifyStoryteller,
   deleteStorytellers
 } from "../../redux/actions/storytellerActions";
 
@@ -91,6 +92,11 @@ export default function Table() {
     }
   }, [selectedStorytellers.length]);
 
+  // Verifys storyteller
+  function handleVerification(id: number) {
+    dispatch(verifyStoryteller(id));
+  }
+
   return (
     <TableContainer>
       <Table>
@@ -134,7 +140,11 @@ export default function Table() {
                 stories/day
               </td>
               <td align="center">
-                <VerifyButton type="button" verified={storyteller.verification}>
+                <VerifyButton
+                  type="button"
+                  verified={storyteller.verification}
+                  onClick={() => {if (!storyteller.verification) handleVerification(storyteller.id)}}
+                >
                   {storyteller.verification ? "Verified" : "Verify"}
                 </VerifyButton>
               </td>
