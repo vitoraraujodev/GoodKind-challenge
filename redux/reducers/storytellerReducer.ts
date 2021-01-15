@@ -25,9 +25,9 @@ export interface StorytellerInterface {
 }
 
 const INITIAL_STATE: any = {
-  storytellers: [],
-  companies: [],
-  plans: []
+  storytellers: {},
+  companies: {},
+  plans: {}
 };
 
 export default function storytellerReducer(state = INITIAL_STATE, action) {
@@ -38,7 +38,19 @@ export default function storytellerReducer(state = INITIAL_STATE, action) {
         companies: action.payload.companies,
         plans: action.payload.plans
       };
+    case "DELETE_STORYTELLERS":
+      const storytellersIds = action.payload;
 
+      const newStorytellers = state.storytellers;
+
+      storytellersIds.forEach(id => {
+        if (newStorytellers[id]) delete newStorytellers[id];
+      });
+
+      return {
+        ...state,
+        storytellers: { ...newStorytellers }
+      };
     default:
       return state;
   }

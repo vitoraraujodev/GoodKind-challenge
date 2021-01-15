@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+// @ts-ignore
+import { deleteStorytellers } from "../../redux/actions/storytellerActions";
 
 import CheckBoxInput from "../CheckBoxInput";
 
@@ -14,10 +17,9 @@ import {
   PageButton
 } from "./styles";
 
-// @ts-ignore
-import { StorytellerInterface } from "./redux/reducers/storytellerReducer";
-
 export default function Table() {
+  const dispatch = useDispatch();
+
   const storytellers = useSelector(
     (state: any) => state.storytellerReducer.storytellers
   );
@@ -28,19 +30,36 @@ export default function Table() {
 
   const plans = useSelector((state: any) => state.storytellerReducer.plans);
 
-  useEffect(() => {
-    console.log("st", storytellers);
-  }, [storytellers]);
+  // List of selected storytellers ids
+  const [selectedStorytellers, setSelectedStorytellers] = useState([]);
 
-  useEffect(() => {
-    console.log("c", companies);
-  }, [companies]);
+  // Selects all storytellers id if selected length !== storytellers amount, or empty selected storytellers if so.
+  function handleSelectAll() {
+    if (selectedStorytellers.length === Object.values(storytellers).length) {
+      setSelectedStorytellers([]);
+    } else {
+      setSelectedStorytellers(
+        Object.values(storytellers).map(storyteller => storyteller.id)
+      );
+    }
+  }
 
-  useEffect(() => {
-    console.log("p", plans);
-  }, [plans]);
+  function handleSelect(id: number) {
+    if (selectedStorytellers.includes(id)) {
+      setSelectedStorytellers(
+        selectedStorytellers.filter(storytellerId => storytellerId !== id)
+      );
+    } else {
+      setSelectedStorytellers([...selectedStorytellers, id]);
+    }
+  }
 
-  const [allSelected, setAllSelected] = useState(false);
+  function handleDelete() {
+    if (selectedStorytellers.length > 0) {
+      dispatch(deleteStorytellers(selectedStorytellers));
+      selectedStorytellers([]);
+    }
+  }
 
   return (
     <TableContainer>
@@ -49,8 +68,12 @@ export default function Table() {
           <tr>
             <th>
               <CheckBoxInput
-                value={allSelected}
-                onChangeValue={() => setAllSelected(!allSelected)}
+                value={
+                  Object.values(storytellers).length > 0 &&
+                  selectedStorytellers.length ===
+                    Object.values(storytellers).length
+                }
+                onChangeValue={handleSelectAll}
               />
             </th>
             <th style={{ textAlign: "left" }}>Storyteller</th>
@@ -65,8 +88,8 @@ export default function Table() {
             <tr key={storyteller.id}>
               <td>
                 <CheckBoxInput
-                  value={allSelected}
-                  onChangeValue={() => setAllSelected(!allSelected)}
+                  value={selectedStorytellers.includes(storyteller.id)}
+                  onChangeValue={() => handleSelect(storyteller.id)}
                 />
               </td>
               <td>{storyteller.name}</td>
@@ -91,7 +114,9 @@ export default function Table() {
 
       <TableButtons>
         <div>
-          <DeleteButton type="button">Delete</DeleteButton>
+          <DeleteButton type="button" onClick={handleDelete}>
+            Delete
+          </DeleteButton>
           <EditButton type="button">Edit</EditButton>
         </div>
 

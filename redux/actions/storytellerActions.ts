@@ -4,3 +4,11 @@ export function setStorytellers(storytellers) {
     payload: storytellers
   };
 }
+
+// Receives a list of storyteller's ids to delete
+export function deleteStorytellers(storytellersIds) {
+  return {
+    type: "DELETE_STORYTELLERS",
+    payload: storytellersIds
+  };
+}

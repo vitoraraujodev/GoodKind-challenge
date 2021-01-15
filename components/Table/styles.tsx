@@ -6,13 +6,24 @@ export const TableContainer = styled.div`
 
 export const Table = styled.table`
   min-width: 640px;
+  border-collapse: collapse;
 
   th + th,
   td + td {
     padding-left: 8px;
   }
 
+  th {
+    padding-bottom: 16px;
+  }
 
+  td {
+    padding: 8px 0;
+  }
+
+  tr + tr {
+    border-top: 1px solid #ddd;
+  }
 
   th {
     color: #888;
@@ -28,12 +39,16 @@ export const VerifyButton = styled.button`
   border: 0;
   border-radius: 6px;
   font-size: 15px;
-  color: ${props => (props.verified ? "#0f0" : "#ee4d64")};
+  color: ${props => (props.verified ? "#2CA42B" : "#ee4d64")};
   font-weight: bold;
-  background: ${props => (props.verified ? "#0f0" : "#fff")};
+  background: ${props => (props.verified ? "#DFF0DF" : "#fff")};
 
   &:hover {
-    background: ${props => (props.verified ? "" : "#f6f6f6")};
+    background: ${props => (props.verified ? "" : "#f4f4f4")};
+  }
+
+  &:active {
+    background: ${props => (props.verified ? "" : "#f4f4f4")};
   }
 `;
 
@@ -56,6 +71,7 @@ export const TableButtons = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 24px;
+  padding: 0 8px;
 
   div {
     display: flex;
@@ -80,14 +96,13 @@ export const DeleteButton = styled.button`
   background: #fff;
 
   &:hover {
-    background: #f6f6f6;
+    background: #f4f4f4;
   }
   &:focus {
-    border: 2px solid #ee4d64;
     outline: none;
   }
   &:active {
-    background: #f0f0f0;
+    background: #ededed;
   }
 `;
 
@@ -102,13 +117,13 @@ export const EditButton = styled.button`
   background: #fff;
 
   &:hover {
-    background: #f6f6f6;
+    background: #f4f4f4;
   }
   &:focus {
     outline: none;
   }
   &:active {
-    background: #f0f0f0;
+    background: #ededed;
   }
 `;
 
@@ -120,7 +135,7 @@ export const PageButton = styled.button`
   border-radius: 6px;
   font-size: 24px;
   color: #666;
-  background: #f6f6f6;
+  background: #f4f4f4;
 
   & + button {
     margin-left: 8px;
