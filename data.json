@@ -1,24 +1,16 @@
-[
-  {
+{
+  "id": 55,
+  "user": 
+    {
     "id": 1,
     "name": "Michael Warshafsky",
     "verification": false,
-    "plan": {
-      "id": 1,
-      "title": "basic",
-      "dayCapacity": 10,
-      "tag": "2020 VIP"
-    }
+    "plan": 1
   },
-  {
-    "id": 2,
-    "name": "Justin Rotman",
-    "verification": false,
-    "plan": {
-      "id": 1,
-      "title": "basic",
-      "dayCapacity": 10,
-      "tag": "2020 VIP"
-    }
+  "plan": {
+    "id": 1,
+    "title": "basic",
+    "dayCapacity": 10,
+    "tag": "2020 VIP"
   }
-]
+}
